@@ -1,0 +1,29 @@
+from huggingface_hub import login
+
+import hydra
+from omegaconf import DictConfig, OmegaConf
+from Trainer1 import Model
+
+@hydra.main(config_path="conf", config_name="config", version_base="1.3")
+def main(cfg: DictConfig):
+
+    cfg.train.output_dir = cfg.train.output_dir + "_"+ cfg.model_id.split("/")[1].split("-")[0]+ "_" + cfg.model_id.split("/")[1].split("-")[-2] + "_" + cfg.mode
+    print(OmegaConf.to_yaml(cfg))
+    # login(cfg.write_token)
+    
+    if 'SFT' in cfg.train.output_dir:
+        trainer = Model(cfg)
+        trainer.SFT()
+    elif 'GRPO' in cfg.train.output_dir:
+        trainer = Model(cfg)
+        trainer.GRPO()
+
+        
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as e:
+        import traceback, sys
+        print("Error occurred:", e)
+        traceback.print_exc()
+        sys.exit(1)
