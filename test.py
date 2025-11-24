@@ -1,4 +1,4 @@
-from Tester import Inference
+from models.Tester import Inference
 import sys
 
 model_id = sys.argv[1]

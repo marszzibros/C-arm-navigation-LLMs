@@ -2,7 +2,7 @@ from huggingface_hub import login
 
 import hydra
 from omegaconf import DictConfig, OmegaConf
-from Trainer import Model
+from models.Trainer import Model
 
 @hydra.main(config_path="conf", config_name="config", version_base="1.3")
 def main(cfg: DictConfig):

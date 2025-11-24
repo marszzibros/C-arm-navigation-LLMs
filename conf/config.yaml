@@ -1,0 +1,8 @@
+defaults:
+  - _self_
+  - train: GRPO
+  - lora: default
+mode: language
+model_id: unsloth/gemma-3-12b-it
+read_token: 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
+write_token: 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
